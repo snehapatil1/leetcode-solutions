@@ -1,5 +1,5 @@
 """
-    Data Structures: Collections
+    Data Structures: Collections, Hash Map
     Time Complexity: O(n)
     Space Complexity: O(n)
 """
