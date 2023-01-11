@@ -1,3 +1,9 @@
+"""
+    Data Structures: Array, Stack
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+"""
+
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """
