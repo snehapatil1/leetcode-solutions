@@ -1,3 +1,9 @@
+"""
+    Data Structures: Array
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+"""
+
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         length = len(nums)
