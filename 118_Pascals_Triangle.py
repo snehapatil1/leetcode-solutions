@@ -1,3 +1,9 @@
+"""
+    Data Structures: Array
+    Time Complexity: O(n)
+    Space Complexity: O(n)
+"""
+
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
         output = []
