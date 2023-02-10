@@ -1,33 +1,27 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        is_satisfied = self.areConstraintsSatisfied(s)
-        if (not is_satisfied):
-            return False
-        
         pairs = {
-            '(': ')',
-            '{': '}',
-            '[': ']',
+            '(' : ')',
+            '[' : ']',
+            '{' : '}'
         }
-        
+
         stack = []
-        for ele in s:
-            if ele in pairs.keys():
-                stack.append(ele)
+
+        s_arr = list(s)
+
+        for ele in range(len(s_arr)):
+            val = s_arr[ele]
+
+            if val in pairs.keys():
+                stack.append(val)
             else:
-                if stack == []:
+                if stack and stack[len(stack)-1] == [a for a in pairs if pairs[a] == val][0]:
+                    stack.pop()
+                else:
                     return False
-                a = stack.pop()
-                if ele != pairs[a]:
-                    return False
-        return stack == []
-    
-    def areConstraintsSatisfied(self, s):
-        if (len(s) < 1) or (len(s) > 10**4):
-            return False
-        for ele in s:
-            if ele not in ('(', ')', '{', '}', '[', ']'):
-                return False
-        if len(s) % 2 != 0:
-            return False
-        return True
+        
+        if not stack:
+            return True
+        
+        return False
