@@ -1,7 +1,7 @@
 import heapq
-# heap.heapify(arr) -> constructs heap (tree)
-# heap.heappush(arr, ele) -> adds element in heap and restructures heap tree
-# heap.heappop(arr) -> deletes top element from heap and restructures heap tree
+# heapq.heapify(arr) -> constructs heap (tree)
+# heapq.heappush(arr, ele) -> adds element in heap and restructures heap tree
+# heapq.heappop(arr) -> deletes top element from heap and restructures heap tree
 
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
