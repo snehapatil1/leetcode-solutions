@@ -16,5 +16,4 @@ class Solution:
             else:
                 index_sum.append(nums[ele])
             
-        print(index_sum)
         return max(index_sum)
