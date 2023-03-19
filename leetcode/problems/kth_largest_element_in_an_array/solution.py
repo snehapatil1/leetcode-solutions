@@ -2,6 +2,7 @@ import heapq
 
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
+        ##### Heap Solution #####
         # initialise max heap
         maxHeap = []
 
@@ -16,3 +17,10 @@ class Solution:
         
         # convert -ve to +ve and return top element from the max heap
         return -(heapq.heappop(maxHeap))
+
+        ##### Simple Solution #####
+        # nums.sort(reverse=True)
+        # return nums[k - 1]
+
+        ##### Heap nlargest Solution #####
+        # return heapq.nlargest(k, nums)[-1]
