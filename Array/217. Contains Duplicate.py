@@ -1,4 +1,10 @@
 """
+    Question:
+        Given an integer array nums, return true if any value appears at least twice in the array
+        , and return false if every element is distinct.
+"""
+
+"""
     Data Structures: Array, Set
     Time Complexity: O(1)
     Space Complexity: O(1)
