@@ -1,3 +1,9 @@
+"""
+    Question:
+        Given an array of meeting time intervals "intervals" where intervals[i] = [starti, endi], 
+        return the minimum number of conference rooms required.
+"""
+
 import heapq
 # heapq.heapify(arr) -> constructs heap (tree)
 # heapq.heappush(arr, ele) -> adds element in heap and restructures heap tree
