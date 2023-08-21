@@ -1,7 +1,8 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        index_dict = {}
-        for idx, ele in enumerate(nums):
-            if (target - ele) in index_dict:
-                return [idx, index_dict[target - ele]]
-            index_dict[ele] = idx
+        hash_map = collections.defaultdict(int)
+        for idx, num in enumerate(nums):
+            complement = target - num
+            if complement in hash_map:
+                return [idx, hash_map[complement]]
+            hash_map[num] = idx
