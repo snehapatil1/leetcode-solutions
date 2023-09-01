@@ -6,28 +6,43 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        if root is None:
-            return False
-        
-        queue = collections.deque()
-        queue.append((root, float('inf'), -float('inf')))
-
-        while queue:
-            node, maxval, minval = queue.popleft()
-
-            if node.val <= minval or node.val >= maxval:
+        def inorder(root):
+            if not root:
+                return True
+            if not inorder(root.left):
                 return False
-            
-            if node.left:
-                if node.left.val < node.val:
-                    queue.append((node.left, node.val, minval))
-                else:
-                    return False
-            
-            if node.right:
-                if node.right.val > node.val:
-                    queue.append((node.right, maxval, node.val))
-                else:
-                    return False
+            if root.val <= self.prev_node:
+                return False
+            self.prev_node = root.val
+            return inorder(root.right)
         
-        return True
+        self.prev_node = -float('inf')
+        return inorder(root)
+        
+        
+        
+        # if root is None:
+        #     return False
+        
+        # queue = collections.deque()
+        # queue.append((root, float('inf'), -float('inf')))
+
+        # while queue:
+        #     node, maxval, minval = queue.popleft()
+
+        #     if node.val <= minval or node.val >= maxval:
+        #         return False
+            
+        #     if node.left:
+        #         if node.left.val < node.val:
+        #             queue.append((node.left, node.val, minval))
+        #         else:
+        #             return False
+            
+        #     if node.right:
+        #         if node.right.val > node.val:
+        #             queue.append((node.right, maxval, node.val))
+        #         else:
+        #             return False
+        
+        # return True
