@@ -4,19 +4,16 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         nums.sort()
-        k = (len(nums) + 1) // 2
-        arr1 = nums[:k]
-        arr2 = nums[k:]
-        arr1.reverse()
-        arr2.reverse()
-        arr1_pointer = 0
-        arr2_pointer = 0
-
-        print(arr1, arr2)
-        for i in range(len(nums)):
-            if i%2 == 0:
-                nums[i] = arr1[arr1_pointer]
-                arr1_pointer += 1
+        mid = (len(nums) + 1) // 2
+        small = nums[:mid]
+        small.reverse()
+        big = nums[mid:]
+        big.reverse()
+        s, b = 0, 0
+        for idx in range(len(nums)):
+            if idx % 2 == 0:
+                nums[idx] = small[s]
+                s += 1
             else:
-                nums[i] = arr2[arr2_pointer]
-                arr2_pointer += 1
+                nums[idx] = big[b]
+                b += 1
