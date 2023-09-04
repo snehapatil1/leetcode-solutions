@@ -10,13 +10,10 @@ class Solution:
         if not root:
             return None
         
-        minVal = min(p.val, q.val)
-        maxVal = max(p.val, q.val)
-
-        while root:
-            if root.val > maxVal:
+        while True:
+            if root.val > p.val and root.val > q.val:
                 root = root.left
-            elif root.val < minVal:
+            elif root.val < p.val and root.val < q.val:
                 root = root.right
             else:
                 return root
