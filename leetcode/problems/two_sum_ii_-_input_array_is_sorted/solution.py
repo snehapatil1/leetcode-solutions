@@ -1,9 +1,9 @@
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        seen = {}
+        visited = defaultdict(int)
 
-        for idx, val in enumerate(numbers):
-            a = target - val
-            if a in seen:
-                return [seen[a]+1, idx+1]
-            seen[val] = idx
+        for idx in range(len(numbers)):
+            complement = target - numbers[idx]
+            if complement in visited:
+                return [visited[complement] + 1, idx + 1]
+            visited[numbers[idx]] = idx
