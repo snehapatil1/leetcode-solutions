@@ -22,8 +22,8 @@ class Solution:
         one_back, two_back = 0, 0
 
         for num in nums:
-            temp = max(num + one_back, two_back)
-            one_back = two_back
+            temp = one_back
+            one_back = max(num + two_back, one_back)
             two_back = temp
         
-        return two_back
+        return one_back
