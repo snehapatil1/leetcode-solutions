@@ -13,15 +13,29 @@ class Solution:
         
         # return False
 
-        cnt = collections.Counter(s1)
+        # cnt = collections.Counter(s1)
         
-        l = 0
-        for r, c in enumerate(s2):
-            cnt[c] -= 1
-            while cnt[c] < 0:
-                cnt[s2[l]] += 1
-                l += 1
-            if r - l + 1 == len(s1):
-                return True
+        # left = 0
+        # for right, ch in enumerate(s2):
+        #     cnt[ch] -= 1
+        #     while cnt[ch] < 0:
+        #         cnt[s2[left]] += 1
+        #         left += 1
+        #     if right - left + 1 == len(s1):
+        #         return True
             
+        # return False
+
+        s1map = Counter(s1)
+        n = len(s1)
+
+        for i in range(len(s2)):
+            if s2[i] in s1map:
+                s1map[s2[i]] -= 1
+            if i >= n and s2[i - n] in s1map:
+                s1map[s2[i - n]] += 1
+            
+            if all([s1map[x] == 0 for x in s1map]):
+                return True
+        
         return False
