@@ -8,6 +8,7 @@ class Solution:
                 r += 1
             return s[l + 1 : r]
         
+        # pick one letter and spread left and right to check if left == right
         for i in range(len(s)):
             output = max(helper_function(s, i, i), helper_function(s, i, i+1), output, key=len)
         
