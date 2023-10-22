@@ -1,16 +1,13 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        hash_map = {}
-        count = 0
-        temp = [num for num in nums]
+        count = Counter(nums)
 
-        for idx, num in enumerate(temp):
-            if num in hash_map:
-                hash_map[num] += 1
-                nums.remove(num)
-                nums.append('_')
-            else:
-                hash_map[num] = 1
-                count += 1
+        for num in count:
+            if count[num] > 1:
+                k = count[num] - 1
+                while k > 0:
+                    nums.remove(num)
+                    nums.append('_')
+                    k -= 1
         
-        return count
+        return len(count)
