@@ -1,8 +1,18 @@
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
-        squared_nums = []
-        for num in nums:
-            squared_nums.append(num * num)
+        n = len(nums)
+        output = [0] * n
+
+        left, right, curr = 0, n - 1, n - 1
+
+        while left <= right:
+            if abs(nums[left]) < abs(nums[right]):
+                num = nums[right]
+                right -= 1
+            else:
+                num = nums[left]
+                left += 1
+            output[curr] = num * num
+            curr -= 1
         
-        squared_nums.sort()
-        return squared_nums
+        return output
