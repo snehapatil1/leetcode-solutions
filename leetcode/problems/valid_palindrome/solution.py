@@ -11,7 +11,7 @@ class Solution:
                 p2 -= 1
             elif not s[p1].isalpha() and not s[p1].isdigit():
                 p1 += 1
-            elif not s[p2].isalpha() and not  s[p2].isdigit():
+            elif not s[p2].isalpha() and not s[p2].isdigit():
                 p2 -= 1
         
         return True
