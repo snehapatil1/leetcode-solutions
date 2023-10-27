@@ -1,12 +1,19 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        if nums[0] == 0 and len(nums) > 1:
+        n = len(nums)
+        
+        @lru_cache(n)
+        def dp(index):
+            if index == n - 1:
+                return True
+            
+            if nums[index] == 0:
+                return False
+            
+            for i in range(index + 1, min(index + nums[index], n - 1) + 1):
+                if dp(i):
+                    return True
+            
             return False
         
-        maxJump = i = 0
-
-        while i < len(nums) and i <= maxJump:
-            maxJump = max(maxJump, nums[i] + i)
-            i += 1
-        
-        return i == len(nums)
+        return dp(0)
