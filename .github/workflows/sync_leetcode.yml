@@ -13,7 +13,7 @@ jobs:
       - name: Sync
         uses: joshcai/leetcode-sync@v1.5
         with:
-          github-token: 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
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           leetcode-csrf-token: 7omPPvX9VhohF1o9KNWmKkilARWLzac6g6YjxxP3tiFZr7nWbvAhPt3lXotEpSPy
           leetcode-session: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfYXV0aF91c2VyX2lkIjoiNjQ4NDM5OCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImFsbGF1dGguYWNjb3VudC5hdXRoX2JhY2tlbmRzLkF1dGhlbnRpY2F0aW9uQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6IjdmMmVjMjRhZmNjNjllYzU3OTBlZTljN2M0Yjg3MjgyYzNhMGU2ZTQ4OWI3MGE4NTZlMDk3MDg1ZGZkMzk4OWMiLCJpZCI6NjQ4NDM5OCwiZW1haWwiOiJzbmVoYS5wYXRpbDEzc3BAZ21haWwuY29tIiwidXNlcm5hbWUiOiJzbmVoYXBhdGlsMSIsInVzZXJfc2x1ZyI6InNuZWhhcGF0aWwxIiwiYXZhdGFyIjoiaHR0cHM6Ly9hc3NldHMubGVldGNvZGUuY29tL3VzZXJzL2F2YXRhcnMvYXZhdGFyXzE2NTM3MzA1NTkucG5nIiwicmVmcmVzaGVkX2F0IjoxNzAwOTAzMTgzLCJpcCI6IjQ1LjExNy43Mi42IiwiaWRlbnRpdHkiOiJlZWRlODVkYjRiNDNlMDk1ODU4Y2M2MTNkOWM0OGUxMSIsInNlc3Npb25faWQiOjUwMzgzMTE1LCJzb2NpYWxhY2NvdW50X3N0YXRlIjpbeyJuZXh0IjoiL3Byb2ZpbGUvYWNjb3VudC8iLCJwcm9jZXNzIjoiY29ubmVjdCIsInNjb3BlIjoiIiwiYXV0aF9wYXJhbXMiOiIifSwiTXBkNEtzU1BhRkFOIl19.uH-S1HFG62q4mF5LVZVGsQSowQ-1A4SX2Us9rRDhnTA
           destination-folder: leetcode
