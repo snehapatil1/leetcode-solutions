@@ -1,7 +1,7 @@
 name: Sync Leetcode
 
 on:
-  workflow_dispatch:
+  # workflow_dispatch:
   schedule:
     - cron: "30 12 * * *"
 
