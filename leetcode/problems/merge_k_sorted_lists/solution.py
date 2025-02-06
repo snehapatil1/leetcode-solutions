@@ -3,34 +3,39 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution:
+
+class Solution:    
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         if not lists:
             return None
         
-        while len(lists) > 1:
-            mergedList = []
-            for i in range(0, len(lists), 2):
-                list1 = lists[i]
-                list2 = lists[i + 1] if (i + 1) < len(lists) else None
-                mergedList.append(self.mergeList(list1, list2))
-            lists = mergedList
-        return lists[0]
+        if len(lists) == 1:
+            return lists[-1]
+        
+        for i in range(1, len(lists)):
+            lt3 = self.mergeTwoLists(lists[i], lists[i - 1])
+            lists[i] = lt3
+        
+        return lists[-1]
     
-    def mergeList(self, list1, list2):
-        dummy = ListNode(0)
-        tail = dummy
-
-        while list1 and list2:
-            if list1.val < list2.val:
-                tail.next = list1
-                list1 = list1.next
+    def mergeTwoLists(self, lt1, lt2):
+        merged = ListNode()
+        dummy = merged
+        while lt1 and lt2:
+            if lt1.val <= lt2.val:
+                merged.next = lt1
+                lt1 = lt1.next
             else:
-                tail.next = list2
-                list2 = list2.next
-            tail = tail.next
-        if list1:
-            tail.next = list1
-        if list2:
-            tail.next = list2
+                merged.next = lt2
+                lt2 = lt2.next
+            merged = merged.next
+        if lt1:
+            merged.next = lt1
+            merged = merged.next
+            lt1 = lt1.next
+        if lt2:
+            merged.next = lt2
+            merged = merged.next
+            lt2 = lt2.next
         return dummy.next
+            
