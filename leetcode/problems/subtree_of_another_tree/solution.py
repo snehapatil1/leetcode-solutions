@@ -8,48 +8,18 @@ class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         if not subRoot:
             return True
-        
         if not root:
             return False
-        
-        if self.isSameTree(root, subRoot):
+            
+        if self.sameTree(root, subRoot):
             return True
         
-        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+        return (self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot))
     
-    def isSameTree(self, root, subRoot):
-        if not root and not subRoot:
-            return True
-        
-        if root and subRoot and root.val == subRoot.val:
-            return self.isSameTree(root.left, subRoot.left) and self.isSameTree(root.right, subRoot.right)
-        
-        return False
-        
-        
-        # if not root or not subRoot:
-        #     return False
-        
-        # self.is_same = False
-
-        # def dfs(root, subRoot):
-        #     if not root and not subRoot:
-        #         return True
+    def sameTree(self, root1, root2):
+            if not root1 and not root2:
+                return True
+            if (root1 and root2 and root1.val == root2.val):
+                return (self.sameTree(root1.left, root2.left) and self.sameTree(root1.right, root2.right))
             
-        #     if not root or not subRoot or root.val != subRoot.val:
-        #         return False
-            
-        #     return dfs(root.left, subRoot.left) and dfs(root.right, subRoot.right)
-        
-        # def preorderTraversal(root):
-        #     if root:
-        #         if root.val == subRoot.val:
-        #             if dfs(root, subRoot):
-        #                 self.is_same = True
-        #                 return
-        #         preorderTraversal(root.left)
-        #         preorderTraversal(root.right)
-        
-        # preorderTraversal(root)
-
-        # return self.is_same
+            return False
