@@ -1,4 +1,4 @@
 class Solution:
     def minimumOperations(self, nums: List[int]) -> int:
-        nset = set(nums)
-        return len(nset) - (0 in nset)
+        nums_set = set(nums)
+        return len(nums_set) - (0 in nums_set)
