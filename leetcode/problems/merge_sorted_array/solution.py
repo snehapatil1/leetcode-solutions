@@ -3,15 +3,12 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        
         temp = nums1[:m]
-
-        p1, p2 = 0, 0
-
-        for i in range(m + n):
-            if p2 >= n or (p1 < m and temp[p1] < nums2[p2]):
-                nums1[i] = temp[p1]
-                p1 += 1
+        nums1_index, nums2_index = 0, 0
+        for write_index in range(m + n):
+            if nums2_index >= n or (nums1_index < m and temp[nums1_index] < nums2[nums2_index]):
+                nums1[write_index] = temp[nums1_index]
+                nums1_index += 1
             else:
-                nums1[i] = nums2[p2]
-                p2 += 1
+                nums1[write_index] = nums2[nums2_index]
+                nums2_index += 1
