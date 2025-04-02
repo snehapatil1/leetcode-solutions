@@ -1,16 +1,18 @@
 class Solution:
-    def getSum(self, n:int):
-        digits = [int(digit) for digit in str(n)]
-        finalSum = 0
-        for num in digits:
-            finalSum += num ** 2
-
-        return finalSum
-    
     def isHappy(self, n: int) -> bool:
-        used_nums = []
-        while n != 1 and n not in used_nums:
-            used_nums.append(n)
-            n = self.getSum(n)
+        seen = set()
+        def get_next_number(num):
+            total = 0
+            while num:
+                digit = num % 10
+                total += digit ** 2
+                num = num // 10
+            return total
+        
+        while n not in seen:
+            seen.add(n)
+            n = get_next_number(n)
+            if n == 1:
+                return True
         
         return n == 1
