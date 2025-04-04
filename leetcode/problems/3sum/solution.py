@@ -1,25 +1,15 @@
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        output = []
-        nums.sort()
+        output = set()
+        visited1, visited2 = set(), {}
+        n = len(nums)
+
         for idx1, num1 in enumerate(nums):
-            if idx1 > 0 and num1 == nums[idx1 - 1]:
-                continue
-            
-            left = idx1 + 1
-            right = len(nums) - 1
-
-            while left < right:
-                target = num1 + nums[left] + nums[right]
-                if target < 0:
-                    left += 1
-                elif target > 0:
-                    right -= 1
-                else:
-                    output.append([num1, nums[left], nums[right]])
-                    left += 1
-                    right -= 1
-                    while left < right and nums[left] == nums[left - 1]:
-                        left += 1
-
-        return output
+            if num1 not in visited1:
+                visited1.add(num1)
+                for idx2, num2 in enumerate(nums[idx1 + 1:]):
+                    num3 = -num1 - num2
+                    if num3 in visited2 and visited2[num3] == idx1:
+                        output.add(tuple(sorted([num1, num2, num3])))
+                    visited2[num2] = idx1
+        return [list(op) for op in output]
