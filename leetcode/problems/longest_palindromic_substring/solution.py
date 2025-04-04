@@ -1,15 +1,20 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        output = ''
-
-        def helper_function(s, l, r):
-            while 0 <= l and r < len(s) and s[l] == s[r]:
-                l -= 1
-                r += 1
-            return s[l + 1 : r]
-        
-        # pick one letter and spread left and right to check if left == right
+        def helper(start, end):
+            while start >= 0 and end < len(s) and s[start] == s[end]:
+                start -= 1
+                end += 1
+            return end - start - 1
+                
+        output = [0, 0]
         for i in range(len(s)):
-            output = max(helper_function(s, i, i), helper_function(s, i, i+1), output, key=len)
+            odd_length = helper(i, i)
+            if odd_length > output[1] - output[0] + 1:
+                dist = odd_length // 2
+                output = [i - dist, i + dist]
+            even_length = helper(i, i + 1)
+            if even_length > output[1] - output[0] + 1:
+                dist = (even_length // 2) - 1
+                output = [i - dist, i + dist + 1]
         
-        return output
+        return s[output[0]:output[1] + 1]
