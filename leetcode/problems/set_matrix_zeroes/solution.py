@@ -3,24 +3,25 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        rows = set()
-        columns = set()
-        matrix_rows = len(matrix)
-        matrix_cols = len(matrix[0])
-
-        # if given cell is 0 then add that row and col in above set to mark those entire rows and cols as 0
-        for row in range(matrix_rows):
-            for col in range(matrix_cols):
+        rows, cols = len(matrix), len(matrix[0])
+        is_col = False
+        for row in range(rows):
+            if matrix[row][0] == 0:
+                is_col = True
+            for col in range(1, cols):
                 if matrix[row][col] == 0:
-                    rows.add(row)
-                    columns.add(col)
+                    matrix[0][col] = 0
+                    matrix[row][0] = 0
         
-        # mark all those rows as 0
-        for each_row in rows:
-            for col in range(matrix_cols):
-                matrix[each_row][col] = 0
+        for row in range(1, rows):
+            for col in range(1, cols):
+                if not matrix[0][col] or not matrix[row][0]:
+                    matrix[row][col] = 0
         
-        # mark all those columns as 0
-        for each_col in columns:
-            for row in range(matrix_rows):
-                matrix[row][each_col] = 0
+        if matrix[0][0] == 0:
+            for col in range(cols):
+                matrix[0][col] = 0
+        
+        if is_col:
+            for row in range(rows):
+                matrix[row][0] = 0
