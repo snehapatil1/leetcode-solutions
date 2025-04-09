@@ -1,28 +1,21 @@
 class Solution:
-    def findCircleNum(self, isConnected: List[List[int]]) -> int:
-        if not isConnected:
-            return 0
-        
+    def bfs(self, node, isConnected, visited):
+        queue = deque([node])
+        visited[node] = True
+        while queue:
+            node = queue.popleft()
+            for i in range(len(isConnected)):
+                if isConnected[node][i] == 1 and not visited[i]:
+                    visited[i] = True
+                    queue.append(i)
+    
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:        
         provinces = 0
-        graph = defaultdict(list)
-        queue = deque([])
         n = len(isConnected)
-
+        visited = [False] * n
         for i in range(n):
-            for j in range(len(isConnected[i])):
-                if isConnected[i][j]:
-                    graph[i].append(j)
-        
-        visited = set()
-        for node in range(n):
-            if node not in visited:
-                queue.append(node)
-                while queue:
-                    node = queue.popleft()
-                    for neighbor in graph[node]:
-                        if neighbor not in visited:
-                            visited.add(node)
-                            queue.append(neighbor)
+            if not visited[i]:
                 provinces += 1
+                self.bfs(i, isConnected, visited)
 
         return provinces
