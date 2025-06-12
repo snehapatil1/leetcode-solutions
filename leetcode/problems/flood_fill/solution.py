@@ -1,20 +1,20 @@
 class Solution:
     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
-        rows = len(image)
-        cols = len(image[0])
-        clr = image[sr][sc]
-        if clr == color:
+        rows, cols = len(image), len(image[0])
+        original_color = image[sr][sc]
+        if color == original_color:
             return image
-        def dfs(r, c):
-            if image[r][c] == clr:
-                image[r][c] = color
-                if r >= 1:
-                    dfs(r - 1, c)
-                if r + 1 < rows:
-                    dfs(r + 1, c)
-                if c >= 1:
-                    dfs(r, c - 1)
-                if c + 1 < cols:
-                    dfs(r, c + 1)
-        dfs(sr, sc)
+        
+        def helper(row, col):
+            if row < 0 or row >= rows or col < 0 or col >= cols or image[row][col] != original_color:
+                return
+            
+            image[row][col] = color
+
+            helper(row + 1, col)
+            helper(row - 1, col)
+            helper(row, col + 1)
+            helper(row, col - 1)
+        
+        helper(sr, sc)
         return image
