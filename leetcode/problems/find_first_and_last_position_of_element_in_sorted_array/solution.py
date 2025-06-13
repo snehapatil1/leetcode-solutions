@@ -1,44 +1,29 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        left = self.getLeftIndex(nums, target)
-        right = self.getRightIndex(nums, target)
+        n = len(nums)
 
-        return [left, right]
-    
-    def getLeftIndex(self, nums, target):
-        left = 0
-        right = len(nums) - 1
-        
-        while left <= right:
-            mid = (left + right) // 2
-
-            if nums[mid] == target:
-                if mid == 0 or nums[mid - 1] != target and mid - 1 >= 0 :
-                    return mid
-                else:
-                    right = mid - 1
-            elif target > nums[mid]:
-                left = mid + 1
-            else:
-                right = mid - 1
-        
-        return -1
-    
-    def getRightIndex(self, nums, target):
-        left = 0
-        right = len(nums) - 1
-        
-        while left <= right:
-            mid = (left + right) // 2
-
-            if nums[mid] == target:
-                if mid == len(nums) - 1 or nums[mid + 1] != target and mid + 1 <= len(nums) - 1 :
-                    return mid
-                else:
+        def fetch(find_start, left, right):
+            while left <= right < n:
+                mid = (left + right) // 2
+                if nums[mid] < target:
                     left = mid + 1
-            elif target > nums[mid]:
-                left = mid + 1
-            else:
-                right = mid - 1
+                elif nums[mid] > target:
+                    right = mid - 1
+                else:
+                    if find_start:
+                        if mid == left or nums[mid - 1] < nums[mid]:
+                            return mid
+                        right = mid - 1
+                    else:
+                        if mid == right or nums[mid + 1] > nums[mid]:
+                            return mid
+                        left = mid + 1
+            return -1
         
-        return -1
+        start = fetch(True, 0, n - 1)
+        if start == -1:
+            return [-1, -1]
+        
+        end = fetch(False, 0, n - 1)
+
+        return [start, end]
