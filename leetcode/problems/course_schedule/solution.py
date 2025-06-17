@@ -3,24 +3,22 @@ class Solution:
         indegree = [0] * numCourses
         adj = [[] for _ in range(numCourses)]
 
-        for target, prerequisite in prerequisites:
-            adj[prerequisite].append(target)
-            indegree[target] += 1
+        for prerequisite in prerequisites:
+            adj[prerequisite[1]].append(prerequisite[0])
+            indegree[prerequisite[0]] += 1
         
         queue = deque()
-        for i in range(numCourses):
-            if indegree[i] == 0:
-                queue.append(i)
+        for course in range(numCourses):
+            if indegree[course] == 0:
+                queue.append(course)
         
-        coursesDone = 0
-
+        completed = 0
         while queue:
             course = queue.popleft()
-            coursesDone += 1
-
-            for neighbor in adj[course]:
-                indegree[neighbor] -= 1
-                if indegree[neighbor] == 0:
-                    queue.append(neighbor)
+            completed += 1
+            for nei in adj[course]:
+                indegree[nei] -= 1
+                if indegree[nei] == 0:
+                    queue.append(nei)
         
-        return coursesDone == numCourses
+        return completed == numCourses
