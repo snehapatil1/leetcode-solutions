@@ -1,24 +1,25 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        # Using Topological Sorting - Kahn's Algorithm
-        adjacency_list = collections.defaultdict(list)
-        indegree = {}
-        
-        for dest, src in prerequisites:
-            adjacency_list[src].append(dest)
-            if dest not in indegree.keys():
-                indegree.update({ dest: 0 })
-            indegree[dest] += 1
-        
-        queue = collections.deque([k for k in range(numCourses) if k not in indegree])
-        courses_order = []
+        indegree = [0] * numCourses
+        adj = [[] for _ in range(numCourses)]
+        output = []
 
+        for idx in range(len(prerequisites)):
+            c2, c1 = prerequisites[idx]
+            indegree[c2] += 1
+            adj[c1].append(c2)
+        
+        queue = deque()
+        for idx in range(numCourses):
+            if indegree[idx] == 0:
+                queue.append(idx)
+        
         while queue:
             course = queue.popleft()
-            courses_order.append(course)
-            if course in adjacency_list:
-                for dependent_course in adjacency_list[course]:
-                    indegree[dependent_course] -= 1
-                    if not indegree[dependent_course]:
-                        queue.append(dependent_course)
-        return courses_order if len(courses_order) == numCourses else []
+            output.append(course)
+            for nei in adj[course]:
+                indegree[nei] -= 1
+                if indegree[nei] == 0:
+                    queue.append(nei)
+        
+        return output if len(output) == numCourses else []
