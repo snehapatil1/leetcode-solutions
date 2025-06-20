@@ -3,24 +3,19 @@ class Solution:
         stack = []
         output = []
 
-        def backtracking(openP, closeP):
-            # if open and close parantheses == n
-            if openP == closeP == n:
+        def backtrack(open_p, close_p):
+            if open_p == close_p == n:
                 output.append("".join(stack))
-                return
             
-            # if open parantheses < n
-            if openP < n:
+            if open_p < n:
                 stack.append("(")
-                backtracking(openP + 1, closeP)
+                backtrack(open_p + 1, close_p)
                 stack.pop()
             
-            # if close parantheses < open parantheses
-            if closeP < openP:
+            if close_p < open_p:
                 stack.append(")")
-                backtracking(openP, closeP + 1)
+                backtrack(open_p, close_p + 1)
                 stack.pop()
 
-        backtracking(0, 0)
+        backtrack(0, 0)
         return output
-            
