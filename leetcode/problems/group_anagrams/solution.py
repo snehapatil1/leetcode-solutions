@@ -7,5 +7,5 @@ class Solution:
             for ch in word:
                 count[ord(ch) - ord('a')] += 1
             hmap[tuple(count)].append(word)
-
+        
         return list(hmap.values())
