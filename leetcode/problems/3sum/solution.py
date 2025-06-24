@@ -12,5 +12,5 @@ class Solution:
                     if num3 in visited2 and visited2[num3] == idx1:
                         output.add(tuple(sorted([num1, num2, num3])))
                     visited2[num2] = idx1
-
+        
         return [list(op) for op in output]
