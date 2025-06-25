@@ -2,18 +2,17 @@ class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
         pairs = {
-            ')': '(',
-            ']': '[',
-            '}': '{'
+            '(': ')',
+            '{': '}',
+            '[': ']'
         }
-        
+
         for ch in s:
-            if stack:
-                if ch in pairs:
-                    if pairs[ch] != stack[-1]:
-                        return False
-                    stack.pop()
-                    continue
-            stack.append(ch)
+            if ch not in pairs:
+                if not stack or ch != pairs[stack[-1]]:
+                    return False
+                stack.pop()
+            else:
+                stack.append(ch)
         
         return stack == []
