@@ -7,17 +7,19 @@
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         self.diameter = 0
-        def depth(root):
-            if not root:
-                return
+
+        def depth(node):
+            if not node:
+                return 0
             
-            left = depth(root.left) if root.left else 0
-            right = depth(root.right) if root.right else 0
+            left = depth(node.left) if node.left else 0
+            right = depth(node.right) if node.right else 0
 
             if left + right > self.diameter:
                 self.diameter = left + right
             
-            return 1 + (left if left > right else right)
+            return max(left, right) + 1
         
         depth(root)
+
         return self.diameter
