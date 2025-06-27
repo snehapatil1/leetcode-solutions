@@ -1,19 +1,19 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        def backtrack(first=0, cur=[]):
-            if len(cur) == k:
-                combinations.append(cur[:])
+        output = []
+        n = len(nums)
+
+        def backtrack(first=0, curr=[]):
+            if len(curr) == k:
+                output.append(curr[:])
                 return
             
             for i in range(first, n):
-                cur.append(nums[i])
-                backtrack(i + 1, cur)
-                cur.pop()
+                curr.append(nums[i])
+                backtrack(i + 1, curr)
+                curr.pop()
         
-        combinations = []
-        n = len(nums)
         for k in range(n + 1):
             backtrack()
-        
-        return combinations
 
+        return output
