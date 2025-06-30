@@ -6,15 +6,12 @@
 #         self.right = right
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
+        
         def height(node):
             if not node:
                 return -1
             return 1 + max(height(node.left), height(node.right))
         
-        if not root:
-            return True
-        
-        return (abs(height(root.left) - height(root.right)) < 2
-            and self.isBalanced(root.left)
-            and self.isBalanced(root.right)
-        )
+        return (abs(height(root.left) - height(root.right)) < 2 and self.isBalanced(root.left) and self.isBalanced(root.right))
