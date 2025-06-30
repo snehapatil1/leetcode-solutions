@@ -3,24 +3,20 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        
+        point = -1
         n = len(nums)
-        breakPoint = -1
-
         for idx in range(n - 1, -1, -1):
             if nums[idx - 1] < nums[idx]:
-                breakPoint = idx - 1
+                point = idx - 1
                 break
         
-        if breakPoint == -1:
+        if point == -1:
             nums.reverse()
-            return nums
+            return
         
-        for idx in range(n - 1, breakPoint, -1):
-            if nums[breakPoint] < nums[idx]:
-                nums[breakPoint], nums[idx] = nums[idx], nums[breakPoint]
+        for idx in range(n - 1, point, -1):
+            if nums[point] < nums[idx]:
+                nums[point], nums[idx] = nums[idx], nums[point]
                 break
-
-        nums[breakPoint + 1:] = reversed(nums[breakPoint + 1:])
         
-        return nums
+        nums[point + 1:] = reversed(nums[point + 1:])
