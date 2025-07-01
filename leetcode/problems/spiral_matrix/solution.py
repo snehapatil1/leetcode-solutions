@@ -1,21 +1,21 @@
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        rows, cols = len(matrix), len(matrix[0])
         output = []
-        rows = len(matrix)
-        cols = len(matrix[0])
-
-        def dfs(i, j):
-            if i < 0 or i >= rows or j < 0 or j >= cols or matrix[i][j] == 'V':
+        
+        def dfs(row, col):
+            if row < 0 or row >= rows or col < 0 or col >= cols or matrix[row][col] == 'V':
                 return
             
-            output.append(matrix[i][j])
-            matrix[i][j] = 'V'
+            output.append(matrix[row][col])
+            matrix[row][col] = 'V'
             
-            if j + 1 >= i:
-                dfs(i, j + 1)
-            dfs(i + 1, j)
-            dfs(i, j - 1)
-            dfs(i - 1, j)
+            if col + 1 >= row:
+                dfs(row, col + 1)
+            dfs(row + 1, col)
+            dfs(row, col - 1)
+            dfs(row - 1, col)
         
         dfs(0, 0)
+        
         return output
