@@ -1,20 +1,22 @@
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
-        countDict = Counter(tasks)
-        readyHeap = [-count for count in countDict.values()]
-        heapq.heapify(readyHeap)
-        waitingQueue = deque()
-        currTime = 0
-        
-        while waitingQueue or readyHeap:
-            currTime += 1
+        counts = Counter(tasks)
+        heap = [-counts[ch] for ch in counts]
+        heapq.heapify(heap)
+        intervals = 0
 
-            if readyHeap:
-                currItem = heapq.heappop(readyHeap) + 1
-                if currItem != 0:
-                    waitingQueue.append((currItem,currTime + n))
+        while heap:
+            cycle = n + 1
+            store = []
+            tasks = 0
+            while cycle > 0 and heap:
+                curr = -heapq.heappop(heap)
+                if curr > 1:
+                    store.append(-(curr - 1))
+                tasks += 1
+                cycle -= 1
+            for x in store:
+                heapq.heappush(heap, x)
+            intervals += tasks if not heap else n + 1
 
-            if waitingQueue and waitingQueue[0][1] == currTime:
-                heapq.heappush(readyHeap,waitingQueue.popleft()[0])
-
-        return currTime
+        return intervals
