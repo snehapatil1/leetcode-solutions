@@ -5,4 +5,4 @@ class Solution:
         else:
             num = - int(str(abs(x))[::-1])
         
-        return num if abs(num) < (2**31) - 1 else 0
+        return num if abs(num) < ((2**31) - 1) else 0
