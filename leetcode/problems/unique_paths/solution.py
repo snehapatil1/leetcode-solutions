@@ -1,9 +1,9 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        board = [[1] * n for _ in range(m)]
+        grid = [[1] * n for _ in range(m)]
 
         for row in range(1, m):
             for col in range(1, n):
-                board[row][col] = board[row - 1][col] + board[row][col - 1]
+                grid[row][col] = grid[row - 1][col] + grid[row][col - 1]
         
-        return board[m - 1][n - 1]
+        return grid[m - 1][n - 1]
