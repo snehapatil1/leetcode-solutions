@@ -1,18 +1,18 @@
 class Solution:
     def myAtoi(self, s: str) -> int:
-        numString = ""
+        num_string = ""
+        p, n = 0, len(s)
         sign = 1
-        ptr, n = 0, len(s)
 
-        while ptr < n and s[ptr] == " ":
-            ptr += 1
+        while p < n and s[p] == " ":
+            p += 1
         
-        if ptr < n and s[ptr] in ("-", "+"):
-            sign = -1 if s[ptr] == "-" else 1
-            ptr += 1
+        if p < n and s[p] in ["+", "-"]:
+            sign = -1 if s[p] == "-" else 1
+            p += 1
         
-        while ptr < n and s[ptr].isdigit():
-            numString += s[ptr]
-            ptr += 1
+        while p < n and s[p].isdigit():
+            num_string += s[p]
+            p += 1
         
-        return max(-2**31, min(sign * int(numString or 0), 2**31 - 1))
+        return max(-2**31, min(sign * int(num_string or 0), 2**31 - 1))
