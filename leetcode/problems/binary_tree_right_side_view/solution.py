@@ -10,22 +10,17 @@ class Solution:
             return []
         
         output = []
-        queue = collections.deque()
-        queue.append(root)
+        queue = deque([root])
 
         while queue:
-            level = []
-
-            for i in range(len(queue)):
+            last_node = None
+            for idx in range(len(queue)):
                 node = queue.popleft()
-                level.append(node.val)
-
+                last_node = node.val
                 if node.left:
                     queue.append(node.left)
-                
                 if node.right:
                     queue.append(node.right)
-            
-            output.append(level[-1])
+            output.append(last_node)
 
         return output
