@@ -4,6 +4,7 @@ class Solution:
             return 0
         
         self.count = 0
+        
         def helper(s, l, r):
             while 0 <= l and r < len(s) and s[l] == s[r]:
                 self.count += 1
