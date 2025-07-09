@@ -2,53 +2,54 @@ class ListNode:
     def __init__(self, key: int, val: int):
         self.key = key
         self.val = val
-        self.head = None
-        self.tail = None
+        self.next = None
+        self.prev = None
 
 class LRUCache:
 
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.dic = {}
+        self.cache_map = defaultdict(ListNode)
         self.head = ListNode(-1, -1)
         self.tail = ListNode(-1, -1)
         self.head.next = self.tail
         self.tail.prev = self.head
 
     def get(self, key: int) -> int:
-        if key not in self.dic:
-            return -1
+        if key in self.cache_map:
+            node = self.cache_map[key]
+            self.remove(node)
+            self.add(node)
+            return node.val
         
-        node = self.dic[key]
-        self.remove(node)
-        self.add(node)
-        return node.val
+        return -1
 
     def put(self, key: int, value: int) -> None:
-        if key in self.dic:
-            node = self.dic[key]
+        if key in self.cache_map:
+            node = self.cache_map[key]
             self.remove(node)
-        
-        node = ListNode(key, value)
-        self.add(node)
+        new_node = ListNode(key, value)
+        self.cache_map[key] = new_node
+        self.add(new_node)
 
-        if len(self.dic) > self.capacity:
+        if len(self.cache_map) > self.capacity:
             delete_node = self.head.next
             self.remove(delete_node)
+            del self.cache_map[delete_node.key]
     
-    def add(self, node: ListNode) -> None:
-        previousEnd = self.tail.prev
-        previousEnd.next = node
-        node.prev = previousEnd
+    def add(self, node):
+        tail_prev = self.tail.prev
+        tail_prev.next = node
+        node.prev = tail_prev
         node.next = self.tail
         self.tail.prev = node
 
-        self.dic[node.key] = node
-
-    def remove(self, node: ListNode) -> None:
+    
+    def remove(self, node):
         node.prev.next = node.next
         node.next.prev = node.prev
-        del self.dic[node.key]
+        
+
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
